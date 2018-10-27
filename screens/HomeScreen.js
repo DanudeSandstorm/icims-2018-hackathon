@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  CheckBox
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -20,51 +21,43 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
+  state = {
+    gluten: false,
+    nut: false
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          {/*<View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
+          <Button
+            label="Set Current Location"
+            styles={{button: styles.primaryButton, label: styles.buttonWhiteText}}
+            onPress={this.setLocation.bind(this)}
+          />
+          <Text style={{flexWrap: 'wrap', alignItems: 'flex-start',flexDirection:'row',}}>Nut Free</Text><CheckBox
+            title="Nut Free"
+            value={this.state.nut}
+            onValueChange={() => this.setState({nut: !this.state.nut})}
+          />
+          <Text>Gluten Free</Text><CheckBox
+            title="Gluten Free"
+            value={this.state.gluten}
+            onValueChange={() => this.setState({gluten: !this.state.gluten})}
+          />
 
-          {/*<View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View> */}
         </ScrollView>
-        {/*
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
-        </View>*/}
       </View>
     );
+  }
+
+  setLocation() {
+    // if (navigator.geolocation.requestAuthorization()) {
+    //   navigator.geolocation.getCurrentPosition((geo_success, geo_error) => {
+
+    //   });
+    // }
   }
 
   _maybeRenderDevelopmentModeWarning() {
@@ -102,6 +95,52 @@ export default class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  scroll: {
+      backgroundColor: '#E1D7D8',
+      padding: 30
+  },
+  label: {
+      color: '#0d8898',
+      fontSize: 20
+  },
+  alignRight: {
+      alignSelf: 'flex-end'
+  },
+  textInput: {
+      height: 80,
+      fontSize: 30,
+      backgroundColor: '#FFF'
+  },
+  buttonWhiteText: {
+      fontSize: 20,
+      color: '#FFF',
+  },
+  buttonBlackText: {
+      fontSize: 20,
+      color: '#595856'
+  },
+  primaryButton: {
+      backgroundColor: '#34A853'
+  },
+  transparentButton: {
+      marginTop: 30,
+      borderColor: '#3B5699',
+      borderWidth: 2
+  },
+  buttonBlueText: {
+      fontSize: 20,
+      color: '#3B5699'
+  },
+  buttonBigText: {
+      fontSize: 20,
+      fontWeight: 'bold'
+  },
+  inline: {
+      flexDirection: 'row'
+  },
+  footer: {
+     marginTop: 100
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
