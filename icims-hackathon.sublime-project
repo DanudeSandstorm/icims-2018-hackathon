@@ -1,0 +1,21 @@
+{
+    "folders":
+    [
+        {
+            "path": ".",
+            "folder_exclude_patterns": ["build", "node_modules"]
+        }
+    ],
+    "syntax_override":
+    {
+        "\\.js$":
+        [
+            "Babel",
+            "JavaScript (Babel)"
+        ]
+    },
+    "settings":
+    {
+        "using_babel_js": true
+    }
+}
