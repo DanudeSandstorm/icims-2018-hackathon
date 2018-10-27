@@ -10,6 +10,7 @@ import {
   CheckBox
 } from 'react-native';
 import { WebBrowser } from 'expo';
+import _ from 'lodash'
 
 import { MonoText } from '../components/StyledText';
 import Container from '../components/Container';
@@ -18,7 +19,7 @@ import Label from '../components/Label';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: 'My Home',
   };
 
   state = {
@@ -36,20 +37,26 @@ export default class HomeScreen extends React.Component {
             styles={{button: styles.primaryButton, label: styles.buttonWhiteText}}
             onPress={this.setLocation.bind(this)}
           />
-          <Text style={{flexWrap: 'wrap', alignItems: 'flex-start',flexDirection:'row',}}>Nut Free</Text><CheckBox
+          <Label text="Nut Free" />
+          <CheckBox
             title="Nut Free"
             value={this.state.nut}
-            onValueChange={() => this.setState({nut: !this.state.nut})}
+            onValueChange={() => {this.setState({nut: !this.state.nut}); this.updateDB.bind(this)}}
           />
-          <Text>Gluten Free</Text><CheckBox
+          <Label text="Gluten Free" />
+          <CheckBox
             title="Gluten Free"
             value={this.state.gluten}
-            onValueChange={() => this.setState({gluten: !this.state.gluten})}
+            onValueChange={() => {this.setState({gluten: !this.state.gluten}); this.updateDB.bind(this)}}
           />
 
         </ScrollView>
       </View>
     );
+  }
+
+  updateDB() {
+
   }
 
   setLocation() {
