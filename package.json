@@ -1,0 +1,29 @@
+{
+  "name": "my-new-project",
+  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "scripts": {
+    "start": "rimraf node_modules/.bin/expo* && expo start --tunnel",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject",
+    "test": "node ./node_modules/jest/bin/jest.js --watchAll"
+  },
+  "jest": {
+    "preset": "jest-expo"
+  },
+  "dependencies": {
+    "@expo/samples": "2.1.1",
+    "aws-amplify": "^1.1.7",
+    "aws-amplify-react-native": "^2.0.7",
+    "expo": "^30.0.1",
+    "react": "^16.4.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-navigation": "^2.18.2",
+    "react-transform-hmr": "^1.0.4"
+  },
+  "devDependencies": {
+    "jest-expo": "30.0.0",
+    "rimraf": "^2.6.2"
+  }
+}

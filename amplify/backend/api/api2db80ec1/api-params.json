@@ -1,0 +1,34 @@
+{
+    "paths": [
+        {
+            "name": "/items",
+            "lambdaFunction": "temp9332f135",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "api2db80ec1",
+    "apiName": "temp2db80ec1",
+    "functionArns": [
+        {
+            "lambdaFunction": "temp9332f135"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "temp-20181027134046-authRole",
+        "unAuthRoleName": "temp-20181027134046-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "temp9332f135",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

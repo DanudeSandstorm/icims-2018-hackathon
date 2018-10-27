@@ -1,0 +1,7 @@
+{
+    "tableName": "dynamof8dac942",
+    "partitionKeyName": "email_address",
+    "partitionKeyType": "S",
+    "sortKeyName": "login_id",
+    "sortKeyType": "S"
+}
