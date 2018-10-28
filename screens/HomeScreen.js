@@ -16,6 +16,9 @@ import { MonoText } from '../components/StyledText';
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
+import MapView from 'react-native-maps';
+import Marker from 'react-native-maps';
+
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -24,13 +27,38 @@ export default class HomeScreen extends React.Component {
 
   state = {
     gluten: false,
-    nut: false
+    nut: false,
+    initLat: 37.78825,
+    initLon: -122.4324
   }
+
+  getInitialState() {
+    return {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+    };
+  }
+
 
 
   render() {
     return (
       <View style={styles.container}>
+        <MapView
+      style={{
+        flex: 1
+      }}
+      initialRegion={this.getInitialState.call()}
+      region={this.state.region}>
+      
+      <Marker
+      coordindate={{latitude:37.788, longitude:-122.432}} />      
+
+      </MapView>
+      
+        
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <Button
             label="Set Current Location"
@@ -65,6 +93,38 @@ export default class HomeScreen extends React.Component {
 
     //   });
     // }
+    var options = {
+      enableHighAccuracy: false,
+      timeout: 5000,
+      maximumAge: 0
+    };
+    
+    let success = (pos) => {
+      var crd = pos.coords;
+    
+      console.log('Your current position is:');
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+      this.setState(
+        {region: 
+          {
+            latitude : crd.latitude,
+            longitude: crd.longitude,
+            latitudeDelta : 0.015,
+            longitudeDelta: 0.015
+          }
+        }
+        );
+    }
+    
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+    
+    navigator.geolocation.getCurrentPosition(success, error);
+
+
   }
 
   _maybeRenderDevelopmentModeWarning() {

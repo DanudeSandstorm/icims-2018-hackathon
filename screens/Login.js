@@ -14,13 +14,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
-const mysql = require('mysql');
-const connection = mysql.createConnection({
- hostname: 'ih18-candy.c3hhbukspyur.us-east-1.rds.amazonaws.com',
- username: 'ih2018ken',
- password: 'Amelia12#',
- database: 'candycorn',
-});
+//const mysql = require('mysql');
+//const connection = mysql.createConnection({
+// hostname: 'ih18-candy.c3hhbukspyur.us-east-1.rds.amazonaws.com',
+// username: 'ih2018ken',
+// password: 'Amelia12#',
+// database: 'candycorn',
+//});
 
 
 export default class Login extends Component {
@@ -33,13 +33,13 @@ export default class Login extends Component {
   render() {
     return (
         <ScrollView style={styles.scroll}>
-            {/*<Picker
+            {<Picker
               selectedValue={this.state.location}
               style={{ height: 50, width: 200, backgroundColor: "white" }}
               onValueChange={(itemValue, itemIndex) => this.setState({location: itemValue})}>
               <Picker.Item label="Treater" value="Treater" />
               <Picker.Item label="Home" value="Home" />
-            </Picker>*/}
+            </Picker>}
 
             <Container>
                 <Label text="Username or Email" />
@@ -79,27 +79,29 @@ export default class Login extends Component {
   }
 
   press(e) {
-    connection.connect();
+   // connection.connect();
 
-    connection.query(`SELECT Password, StayID FROM users WHERE Email=${this.state.username}`, function (error, results, fields) {
+  /*  connection.query(`SELECT Password, StayID FROM users WHERE Email=${this.state.username}`, function (error, results, fields) {*/
         if (this.error) {
             this.state.password = ""; // invalid login
         }
-        if (results[0].Password == this.state.password) {
-            if (results[0].StayID > 0) {
-                this.props.navigation.navigate("Home");
-            } else {
-                this.props.navigation.navigate("Treater");
-            }
-        } else {
-            this.state.password = ""; // invalid login
+        //if (results[0].Password == this.state.password) {
+         //   if (results[0].StayID > 0) {
+         else {   
+         this.props.navigation.navigate("Home");
+         }
+        //    } else {
+         //       this.props.navigation.navigate("Treater");
+         //   }
+        //} else {
+         ///   this.state.password = ""; // invalid login
         }
 
-    });
+   // });
 
-    connection.end();
+    /*connection.end();*/
   }
-}
+
 
 const styles = StyleSheet.create({
     scroll: {

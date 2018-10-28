@@ -22,6 +22,12 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "android": {
+      "package": "com.reactnative.googlemaptest",
+      "config": {
+         "googleMaps": { "apiKey": "AIzaSyCbiCLH1XFHdosKqMsG6IgUuWQdRskntqw" }   
+      }
+   }
   }
 }
