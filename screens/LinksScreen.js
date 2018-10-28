@@ -57,7 +57,7 @@ export default class LinksScreen extends React.Component {
   updateNut() {
     connection.connect();
 
-    connection.query(`UPDATE users SET NutFree=${this.state.nut} WHERE UserID=${}`, function (error, results, fields) {
+    connection.query(`UPDATE users SET NutFree=${this.state.nut} WHERE UserID=0`, function (error, results, fields) {
 
     });
 
@@ -67,7 +67,7 @@ export default class LinksScreen extends React.Component {
   updateGluten() {
     connection.connect();
 
-    connection.query(`UPDATE users SET GlutenFree=${this.state.gluten} WHERE UserID=${}`, function (error, results, fields) {
+    connection.query(`UPDATE users SET GlutenFree=${this.state.gluten} WHERE UserID=0`, function (error, results, fields) {
 
     });
 
