@@ -26,7 +26,7 @@
     "android": {
       "package": "com.reactnative.googlemaptest",
       "config": {
-         "googleMaps": { "apiKey": "AIzaSyCbiCLH1XFHdosKqMsG6IgUuWQdRskntqw" }   
+         "googleMaps": { "apiKey": <INSERT API KEY HERE> }   
       }
    }
   }
