@@ -18,6 +18,7 @@ import Button from '../components/Button';
 import Label from '../components/Label';
 import MapView from 'react-native-maps';
 import Marker from 'react-native-maps';
+import Toast, {DURATION} from 'react-native-easy-toast'
 
 
 export default class HomeScreen extends React.Component {
@@ -29,7 +30,11 @@ export default class HomeScreen extends React.Component {
     gluten: false,
     nut: false,
     initLat: 37.78825,
-    initLon: -122.4324
+    initLon: -122.4324,
+    markers:{
+      latitude:0,
+      longitude:0
+    }
   }
 
   getInitialState() {
@@ -51,10 +56,13 @@ export default class HomeScreen extends React.Component {
         flex: 1
       }}
       initialRegion={this.getInitialState.call()}
-      region={this.state.region}>
+      region={this.state.region}
+      rotateEnabled={false}
+      scrollEnabled={false}
+      zoomEnabled={false}
+      >
       
-      <Marker
-      coordindate={{latitude:37.788, longitude:-122.432}} />      
+      <MapView.Marker coordinate={{latitude: this.state.markers.latitude, longitude: this.state.markers.longitude}} />
 
       </MapView>
       
@@ -65,12 +73,15 @@ export default class HomeScreen extends React.Component {
             styles={{button: styles.primaryButton, label: styles.buttonWhiteText}}
             onPress={this.setLocation.bind(this)}
           />
-          <Label text="Nut Free" />
+
+          <Label text="Nut Free" style={styles.labelText} />
           <CheckBox
             title="Nut Free"
             value={this.state.nut}
             onValueChange={() => {this.setState({nut: !this.state.nut}); this.updateDB.bind(this)}}
           />
+
+
           <Label text="Gluten Free" />
           <CheckBox
             title="Gluten Free"
@@ -79,6 +90,7 @@ export default class HomeScreen extends React.Component {
           />
 
         </ScrollView>
+        <Toast ref="toast" defaultCloseDelay={100}/>
       </View>
     );
   }
@@ -88,11 +100,8 @@ export default class HomeScreen extends React.Component {
   }
 
   setLocation() {
-    // if (navigator.geolocation.requestAuthorization()) {
-    //   navigator.geolocation.getCurrentPosition((geo_success, geo_error) => {
+    this.refs.toast.show('Updating Location...', 500);
 
-    //   });
-    // }
     var options = {
       enableHighAccuracy: false,
       timeout: 5000,
@@ -105,7 +114,7 @@ export default class HomeScreen extends React.Component {
       console.log('Your current position is:');
       console.log(`Latitude : ${crd.latitude}`);
       console.log(`Longitude: ${crd.longitude}`);
-      console.log(`More or less ${crd.accuracy} meters.`);
+      
       this.setState(
         {region: 
           {
@@ -113,9 +122,15 @@ export default class HomeScreen extends React.Component {
             longitude: crd.longitude,
             latitudeDelta : 0.015,
             longitudeDelta: 0.015
+          },
+          markers:
+          {
+            latitude: crd.latitude,
+            longitude: crd.longitude
           }
         }
         );
+        this.refs.toast.show('Updated Location Successfully!', 1000);
     }
     
     function error(err) {
@@ -208,6 +223,11 @@ const styles = StyleSheet.create({
   footer: {
      marginTop: 100
   },
+  labelText: {
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -221,6 +241,9 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 30,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   welcomeContainer: {
     alignItems: 'center',

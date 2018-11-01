@@ -14,16 +14,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Label from '../components/Label';
-//const mysql = require('mysql');
-//const connection = mysql.createConnection({
-// hostname: 'ih18-candy.c3hhbukspyur.us-east-1.rds.amazonaws.com',
-// username: 'ih2018ken',
-// password: 'Amelia12#',
-// database: 'candycorn',
-//});
+import DynamoDB from 'react-native-dynamodb'
+
+
 
 
 export default class Login extends Component {
+    
 
   state = {
     location: "Treater",
@@ -33,16 +30,9 @@ export default class Login extends Component {
   render() {
     return (
         <ScrollView style={styles.scroll}>
-            {<Picker
-              selectedValue={this.state.location}
-              style={{ height: 50, width: 200, backgroundColor: "white" }}
-              onValueChange={(itemValue, itemIndex) => this.setState({location: itemValue})}>
-              <Picker.Item label="Treater" value="Treater" />
-              <Picker.Item label="Home" value="Home" />
-            </Picker>}
-
+           
             <Container>
-                <Label text="Username or Email" />
+                <Label text="Email" />
                 <TextInput
                     style={styles.textInput}
                     value={this.state.username}
@@ -58,6 +48,17 @@ export default class Login extends Component {
                     onChangeText={(password) => this.setState({ password })}
                 />
             </Container>
+            
+            <Container>
+                <Label text="Login Method: " />
+            <Picker
+              selectedValue={this.state.location}
+              style={{ height: 50, width: 150, alignSelf: 'center'}}
+              onValueChange={(itemValue, itemIndex) => this.setState({location: itemValue})}>
+              <Picker.Item label="Treater" value="Treater" />
+              <Picker.Item label="Tricker" value="Home" />
+            </Picker>
+            </Container>
 
 
             <View style={styles.footer}>
@@ -67,39 +68,23 @@ export default class Login extends Component {
                         styles={{button: styles.primaryButton, label: styles.buttonWhiteText}}
                         onPress={this.press.bind(this)} />
                 </Container>
-                {/*<Container>
-                    <Button
-                        label="CANCEL"
-                        styles={{label: styles.buttonBlackText}}
-                        onPress={this.press.bind(this)} />
-                </Container>*/}
+               
             </View>
         </ScrollView>
     );
   }
 
-  press(e) {
-   // connection.connect();
 
-  /*  connection.query(`SELECT Password, StayID FROM users WHERE Email=${this.state.username}`, function (error, results, fields) {*/
+  press(e) {
+  
         if (this.error) {
             this.state.password = ""; // invalid login
         }
-        //if (results[0].Password == this.state.password) {
-         //   if (results[0].StayID > 0) {
          else {   
+
          this.props.navigation.navigate("Home");
          }
-        //    } else {
-         //       this.props.navigation.navigate("Treater");
-         //   }
-        //} else {
-         ///   this.state.password = ""; // invalid login
         }
-
-   // });
-
-    /*connection.end();*/
   }
 
 

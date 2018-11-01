@@ -11,13 +11,6 @@ import {
 } from 'react-native';
 import Label from '../components/Label';
 import _ from 'lodash';
-/*const mysql = require('mysql');
-const connection = mysql.createConnection({
- hostname: 'ih18-candy.c3hhbukspyur.us-east-1.rds.amazonaws.com',
- username: 'ih2018ken',
- password: 'Amelia12#',
- database: 'candycorn',
-});*/
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
@@ -54,25 +47,6 @@ export default class LinksScreen extends React.Component {
     );
   }
 
-  /* updateNut() {
-    connection.connect();
-
-    connection.query(`UPDATE users SET NutFree=${this.state.nut} WHERE UserID=${}`, function (error, results, fields) {
-
-    });
-
-    connection.end();
-  }
-
-  updateGluten() {
-    connection.connect();
-
-    connection.query(`UPDATE users SET GlutenFree=${this.state.gluten} WHERE UserID=${}`, function (error, results, fields) {
-
-    });
-
-    connection.end();
-  }*/
 }
 
 
